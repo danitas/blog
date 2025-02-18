@@ -1,7 +1,15 @@
-import React from "react";
+'use client';
+
 import Modal from "@/components/Modal";
+import {useState} from "react";
 
 const AddPost = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleStateModal = () => {
+    setIsOpen(prevState => !prevState);
+  }
+
   return (
     <>
       <section className="flex flex-col my-12">
@@ -14,6 +22,7 @@ const AddPost = () => {
           change and drive lasting impact.
         </p>
         <button
+          onClick={handleStateModal}
           data-modal-target="addPostModal"
           data-modal-toggle="addPostModal"
           type="button"
@@ -22,7 +31,7 @@ const AddPost = () => {
           Add New Post
         </button>
       </section>
-      <Modal />
+      <Modal open={isOpen} close={handleStateModal} />
     </>
   );
 };

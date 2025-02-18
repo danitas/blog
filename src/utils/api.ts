@@ -6,5 +6,7 @@ export const getPosts = async ({ maxPosts }) => {
   );
   const posts = response.data;
 
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
   return posts.slice(0, maxPosts);
 };
