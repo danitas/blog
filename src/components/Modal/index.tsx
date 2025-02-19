@@ -4,13 +4,15 @@ import CloseCTA from "@/components/Modal/CloseCTA";
 import Form from "@/components/Modal/Form";
 
 type TModalProps = {
+  id?: string;
+  title?: string;
+  body?: string;
   open: boolean;
   close: () => void;
+  isEdit?: boolean;
 };
 
-const Modal = ({ open, close }: TModalProps) => {
-  const [isEdit, isEditSet] = useState(false);
-
+const Modal = ({ id, title, body, open, close, isEdit }: TModalProps) => {
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
 
@@ -44,7 +46,7 @@ const Modal = ({ open, close }: TModalProps) => {
                 </h3>
                 <CloseCTA close={close} />
               </div>
-              <Form />
+              <Form id={id} title={title} body={body} />
             </div>
           </div>
         </>

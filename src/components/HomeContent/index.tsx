@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import EditCTA from "@/components/HomeContent/EditCTA";
 
-type TPostProps = {
+export type TPostProps = {
   id: string;
-  title: string;
-  body: string;
+  title?: string;
+  body?: string;
 };
 
 function HomeContent({ id, title, body }: TPostProps) {
@@ -19,7 +19,7 @@ function HomeContent({ id, title, body }: TPostProps) {
       const lineHeight = parseFloat(
         getComputedStyle(textRef.current).lineHeight,
       );
-      const maxHeight = lineHeight * 3; // Maximum height for 3 lines
+      const maxHeight = lineHeight * 3;
 
       if (textRef.current.scrollHeight > maxHeight) {
         setShouldClamp(true);
@@ -32,15 +32,8 @@ function HomeContent({ id, title, body }: TPostProps) {
       key={id}
       className="relative w-full md:w-1/2 lg:w-1/5 flex flex-col justify-between max-w-sm px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
-      <button type="button" className="absolute right-[15px] top-[15px]">
-        <Pencil
-          width="20"
-          height="20"
-          color="white"
-          className="cursor-pointer"
-        />
-      </button>
       <section className="flex flex-col">
+        <EditCTA id={id} title={title} body={body} />
         <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}
         </h3>
@@ -53,7 +46,8 @@ function HomeContent({ id, title, body }: TPostProps) {
       </section>
 
       <Link
-        href="#"
+        href={`/post/${id}`}
+        passHref
         className="mt-5 px-3 max-w-[100px] py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
       >
         Read more

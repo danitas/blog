@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Poppins } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -29,7 +30,11 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${poppins.variable} bg-neutral-100`}
       >
-        {children}
+        <section className="container mx-auto my-9">
+          <Header />
+
+          {children}
+        </section>
       </body>
     </html>
   );
