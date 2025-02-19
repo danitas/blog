@@ -27,9 +27,12 @@ const Form = ({ id, title = "", body = "" }: TFormProps) => {
       body,
     },
   });
-  const titleValue = watch("title");
-  const bodyValue = watch("body");
+  const titleValue = watch("title") || "";
+  const bodyValue = watch("body") || "";
+  const isEditing = Boolean(id);
   const isModified = titleValue !== title || bodyValue !== body;
+  const isNewPostValid = titleValue.length >= 3 && bodyValue.length >= 3;
+  const isCTADisabled = isEditing ? !isModified : !isNewPostValid;
 
   const onSubmit: SubmitHandler<TFormValues> = (data) => console.log(data);
 
@@ -80,8 +83,8 @@ const Form = ({ id, title = "", body = "" }: TFormProps) => {
         className={clsx(
           "min-w-[100px] text-center justify-center flex mb-5 px-3 py-2 text-sm font-medium text-white rounded-lg",
           {
-            "bg-lime-700 hover:bg-lime-600 cursor-pointer": isModified,
-            "bg-gray-400 cursor-not-allowed": !isModified,
+            "bg-lime-700 hover:bg-lime-600 cursor-pointer": !isCTADisabled,
+            "bg-gray-400 cursor-not-allowed": isCTADisabled,
           },
         )}
       >
