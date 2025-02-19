@@ -36,9 +36,9 @@ const Form = () => {
       </div>
       <button
         type="submit"
-        className="min-w-[100px] text-center justify-center flex mb-5 px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
+        className="cursor-pointer min-w-[100px] text-center justify-center flex mb-5 px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
       >
-        Add
+        Submit
       </button>
     </form>
   );

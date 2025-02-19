@@ -14,7 +14,7 @@ export default async function Home() {
       <main className="mx-4 md:mx-8">
         <AddPost />
 
-        <section className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-5 md:gap-15">
+        <section className="flex flex-wrap gap-5 md:gap-15 justify-between">
           {posts !== null &&
             Object.keys(posts).map((article) => (
               <HomeContent {...posts[article]} key={article} />

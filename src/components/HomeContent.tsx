@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { Pencil } from "lucide-react";
 
 type TPostProps = {
   id: string;
@@ -29,8 +30,16 @@ function HomeContent({ id, title, body }: TPostProps) {
   return (
     <section
       key={id}
-      className="mx-auto flex flex-col justify-between max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="relative w-full md:w-1/2 lg:w-1/5 flex flex-col justify-between max-w-sm px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
+      <button type="button" className="absolute right-[15px] top-[15px]">
+        <Pencil
+          width="20"
+          height="20"
+          color="white"
+          className="cursor-pointer"
+        />
+      </button>
       <section className="flex flex-col">
         <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}

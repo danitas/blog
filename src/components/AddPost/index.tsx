@@ -1,14 +1,15 @@
-'use client';
+"use client";
 
 import Modal from "@/components/Modal";
-import {useState} from "react";
+import React, { useState } from "react";
+import { createPortal } from "react-dom";
 
 const AddPost = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleStateModal = () => {
-    setIsOpen(prevState => !prevState);
-  }
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -23,15 +24,16 @@ const AddPost = () => {
         </p>
         <button
           onClick={handleStateModal}
-          data-modal-target="addPostModal"
-          data-modal-toggle="addPostModal"
           type="button"
           className="cursor-pointer max-w-[150px] mb-5 px-3 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
         >
           Add New Post
         </button>
       </section>
-      <Modal open={isOpen} close={handleStateModal} />
+      {createPortal(
+        <Modal open={isOpen} close={handleStateModal} />,
+        document.body,
+      )}
     </>
   );
 };

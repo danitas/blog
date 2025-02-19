@@ -1,28 +1,55 @@
-import Form from "@/components/Modal/Form";
+"use client";
+import React, { useEffect, useState } from "react";
 import CloseCTA from "@/components/Modal/CloseCTA";
+import Form from "@/components/Modal/Form";
 
 type TModalProps = {
   open: boolean;
   close: () => void;
-}
+};
 
 const Modal = ({ open, close }: TModalProps) => {
-  return (
-    <div
-      id="addPostModal"
-      tabIndex={-1}
-      aria-hidden="true"
-      className={`${open ? '' : 'hidden overflow-x-hidden overflow-y-auto'} overflow-y-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
-    >
-      <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
-        <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-          Create New Post
-        </h3>
-        <CloseCTA close={close} />
-      </div>
+  const [isEdit, isEditSet] = useState(false);
 
-      <Form />
-    </div>
+  useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [open]);
+
+  return (
+    <>
+      {open && (
+        <>
+          <div
+            className="cursor-pointer fixed bg-black opacity-75 flex w-full h-full left-0 top-0"
+            onClick={() => close()}
+          ></div>
+
+          <div
+            className={`${
+              open ? "fixed" : "hidden"
+            } overflow-y-hidden right-1/2 top-1/2 transform translate-x-1/2 -translate-y-1/2 flex justify-center items-center`}
+          >
+            <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
+              <div className="flex min-w-[300px] md:min-w-[400px] items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                  {isEdit ? "Edit existed Post" : "Create new Post"}
+                </h3>
+                <CloseCTA close={close} />
+              </div>
+              <Form />
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
