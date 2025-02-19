@@ -1,11 +1,17 @@
 "use client";
 
 import Modal from "@/components/Modal";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { createPortal } from "react-dom";
 
 const AddPost = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const [mounted, setMounted] = useState(false); // Track if component is mounted
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleStateModal = () => {
     setIsOpen((prevState) => !prevState);
@@ -30,7 +36,7 @@ const AddPost = () => {
           Add New Post
         </button>
       </section>
-      {createPortal(
+      {mounted && createPortal(
         <Modal open={isOpen} close={handleStateModal} />,
         document.body,
       )}
