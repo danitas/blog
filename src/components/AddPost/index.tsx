@@ -19,7 +19,7 @@ const AddPost = () => {
 
   return (
     <>
-      <section className="flex flex-col my-[100px] md:my-[150px]">
+      <section className="flex flex-col my-[50px] md:my-[130px]">
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-blue-950 lg:text-5xl">
           Share Your Insights with the World
         </h1>
