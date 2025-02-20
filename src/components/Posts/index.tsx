@@ -9,7 +9,7 @@ type TPostsProps = {
 };
 
 const Posts = ({ posts }: TPostsProps) => {
-  const { setPosts } = usePostStore();
+  const { posts: storedPosts, setPosts } = usePostStore();
 
   useEffect(() => {
     if (posts.length > 0) {
@@ -19,8 +19,8 @@ const Posts = ({ posts }: TPostsProps) => {
 
   return (
     <>
-      {posts.length > 0 &&
-        posts.map((post) => <HomeContent {...post} key={post.id} />)}
+      {storedPosts.length > 0 &&
+        storedPosts.map((post) => <HomeContent {...post} key={post.id} />)}
     </>
   );
 };
