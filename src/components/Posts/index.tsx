@@ -14,16 +14,11 @@ const Posts = ({ posts }: TPostsProps) => {
   const [loadCount, setLoadCount] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const savedPosts = JSON.parse(
-      localStorage.getItem("posts-storage") || "[]",
-    );
-    if (savedPosts.length > 0) {
-      setPosts(savedPosts);
-    } else {
-      setPosts(posts);
-    }
-  }, [posts, setPosts]);
+    useEffect(() => {
+        if (posts.length > 0) {
+            setPosts(posts);
+        }
+    }, [posts]);
 
   useEffect(() => {
     setVisiblePosts(posts.slice(0, loadCount));

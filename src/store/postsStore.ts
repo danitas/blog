@@ -29,7 +29,6 @@ export const usePostStore = create<PostState>()(
     }),
     {
       name: "posts-storage",
-      getStorage: () => localStorage,
     },
   ),
 );
