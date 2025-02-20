@@ -9,7 +9,7 @@ import Modal from "@/components/Modal";
 const EditCTA = ({ id, title, body }: TPostProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const [mounted, setMounted] = useState(false); // Track if component is mounted
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);

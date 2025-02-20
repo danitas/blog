@@ -30,7 +30,7 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${poppins.variable} bg-neutral-100`}
       >
-        <section className="container mx-auto my-9">
+        <section className="container mx-auto py-9 min-h-screen relative">
           <Header />
 
           {children}
