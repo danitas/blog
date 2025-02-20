@@ -7,7 +7,7 @@ type PostState = {
   setPosts: (newPosts: TPostProps[]) => void;
   addPost: (post: TPostProps) => void;
   updatePost: (updatedPost: TPostProps) => void;
-  removePost: (id: string) => void;
+  removePost: (id: number) => void;
 };
 
 export const usePostStore = create<PostState>()(

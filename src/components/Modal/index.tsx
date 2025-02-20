@@ -4,7 +4,7 @@ import CloseCTA from "@/components/Modal/CloseCTA";
 import Form from "@/components/Modal/Form";
 
 type TModalProps = {
-  id?: string;
+  id?: number;
   title?: string;
   body?: string;
   open: boolean;

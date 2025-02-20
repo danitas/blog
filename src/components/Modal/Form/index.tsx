@@ -6,7 +6,7 @@ import { usePostStore } from "@/store/postsStore";
 import clsx from "clsx";
 
 type TFormProps = {
-  id?: string;
+  id?: number;
   title?: string;
   body?: string;
   closeModal: () => void;
@@ -39,7 +39,8 @@ const Form = ({ id, title = "", body = "", closeModal }: TFormProps) => {
     if (isEditing) {
       updatePost({ id: id!, ...data });
     } else {
-      addPost({ id: crypto.randomUUID(), ...data });
+      // TODO fix id
+      addPost({ id: 3, ...data });
     }
     closeModal();
   };

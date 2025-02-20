@@ -1,9 +1,11 @@
 import { getPost } from "@/utils/api";
 import { Quote } from "lucide-react";
 
-const PostDetail = async ({ params }) => {
+const PostDetail = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const post = await getPost({ id });
+
+  if (!post) return <div>No post</div>;
 
   return (
     <section className="mt-[150px] mx-auto max-w-[300px] md:max-w-[950px] relative flex items-center flex-col">

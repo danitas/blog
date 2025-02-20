@@ -3,12 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import EditCTA from "@/components/HomeContent/EditCTA";
+import { TPost } from "@/utils/api";
 
-export type TPostProps = {
-  id: string;
-  title?: string;
-  body?: string;
-};
+export type TPostProps = Omit<TPost, "userId">;
 
 function HomeContent({ id, title, body }: TPostProps) {
   const textRef = useRef<HTMLParagraphElement>(null);

@@ -2,9 +2,14 @@
 import React, { useEffect } from "react";
 import HomeContent from "@/components/HomeContent";
 import { usePostStore } from "@/store/postsStore";
+import { TPost } from "@/utils/api";
 
-const Posts = () => {
-  const { posts, setPosts } = usePostStore();
+type TPostsProps = {
+  posts: Omit<TPost, "userId">[];
+};
+
+const Posts = ({ posts }: TPostsProps) => {
+  const { setPosts } = usePostStore();
 
   useEffect(() => {
     const savedPosts = JSON.parse(
