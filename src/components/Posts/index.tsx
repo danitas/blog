@@ -14,11 +14,11 @@ const Posts = ({ posts }: TPostsProps) => {
   const [loadCount, setLoadCount] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        if (posts.length > 0) {
-            setPosts(posts);
-        }
-    }, [posts]);
+  useEffect(() => {
+    if (posts.length > 0) {
+      setPosts(posts);
+    }
+  }, [posts]);
 
   useEffect(() => {
     setVisiblePosts(posts.slice(0, loadCount));
