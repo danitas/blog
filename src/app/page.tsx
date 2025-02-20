@@ -2,12 +2,8 @@ import { getPosts } from "@/utils/api";
 import AddPost from "@/components/AddPost";
 import Posts from "@/components/Posts";
 
-export async function fetchPosts() {
-  return await getPosts({});
-}
-
 export default async function Home() {
-  const posts = await fetchPosts();
+  const posts = await getPosts({});
 
   if (!posts)
     return (

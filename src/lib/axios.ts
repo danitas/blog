@@ -19,7 +19,7 @@ export const axiosRequest = async <T, D = {}>(
       ...(method !== "get" && data ? { data } : {}),
     };
 
-    const response: AxiosResponse<T> = await axiosInstance.request(config);
+    const response: AxiosResponse<T> = await axiosInstance(config);
 
     return response.data;
   } catch (error: unknown) {

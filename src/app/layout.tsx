@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import PostStoreProvider from "@/context/PostStoreContext";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin"],
@@ -30,11 +31,13 @@ export default function RootLayout({
       <body
         className={`${cormorantGaramond.variable} ${poppins.variable} bg-neutral-100`}
       >
-        <section className="container mx-auto py-9 min-h-screen relative">
-          <Header />
+        <PostStoreProvider>
+          <section className="container mx-auto py-9 min-h-screen relative">
+            <Header />
 
-          {children}
-        </section>
+            {children}
+          </section>
+        </PostStoreProvider>
       </body>
     </html>
   );

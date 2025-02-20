@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import HomeContent from "@/components/HomeContent";
-import { usePostStore } from "@/store/postsStore";
 import { TPost } from "@/utils/api";
+import { usePostStore } from "@/context/PostStoreContext";
 
 type TPostsProps = {
   posts: Omit<TPost, "userId">[];
@@ -12,7 +12,7 @@ const Posts = ({ posts }: TPostsProps) => {
   const [visiblePosts, setVisiblePosts] = useState<Omit<TPost, "userId">[]>([]);
   const [loadCount, setLoadCount] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
-  const { posts: storedPosts, setPosts } = usePostStore();
+  const { posts: storedPosts, setPosts } = usePostStore((store) => store);
 
   useEffect(() => {
     if (posts.length > 0) {
@@ -21,8 +21,8 @@ const Posts = ({ posts }: TPostsProps) => {
   }, [posts]);
 
   useEffect(() => {
-    setVisiblePosts(posts.slice(0, loadCount));
-  }, [posts, loadCount]);
+    setVisiblePosts(storedPosts.slice(0, loadCount));
+  }, [storedPosts, loadCount]);
 
   const loadMorePosts = () => {
     setIsLoading(true);

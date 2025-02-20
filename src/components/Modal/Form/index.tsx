@@ -2,8 +2,8 @@
 
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { usePostStore } from "@/store/postsStore";
 import clsx from "clsx";
+import { usePostStore } from "@/context/PostStoreContext";
 
 type TFormProps = {
   id?: number;
@@ -18,7 +18,7 @@ type TFormValues = {
 };
 
 const Form = ({ id, title = "", body = "", closeModal }: TFormProps) => {
-  const { addPost, updatePost } = usePostStore();
+  const { addPost, updatePost } = usePostStore((store) => store);
   const {
     register,
     handleSubmit,
