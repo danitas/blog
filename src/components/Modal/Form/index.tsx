@@ -2,12 +2,14 @@
 
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { usePostStore } from "@/store/postsStore";
 import clsx from "clsx";
 
 type TFormProps = {
   id?: string;
   title?: string;
   body?: string;
+  closeModal: () => void;
 };
 
 type TFormValues = {
@@ -15,18 +17,17 @@ type TFormValues = {
   body: string;
 };
 
-const Form = ({ id, title = "", body = "" }: TFormProps) => {
+const Form = ({ id, title = "", body = "", closeModal }: TFormProps) => {
+  const { addPost, updatePost } = usePostStore();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<TFormValues>({
-    defaultValues: {
-      title,
-      body,
-    },
+    defaultValues: { title, body },
   });
+
   const titleValue = watch("title") || "";
   const bodyValue = watch("body") || "";
   const isEditing = Boolean(id);
@@ -34,16 +35,20 @@ const Form = ({ id, title = "", body = "" }: TFormProps) => {
   const isNewPostValid = titleValue.length >= 3 && bodyValue.length >= 3;
   const isCTADisabled = isEditing ? !isModified : !isNewPostValid;
 
-  const onSubmit: SubmitHandler<TFormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<TFormValues> = (data) => {
+    if (isEditing) {
+      updatePost({ id: id!, ...data });
+    } else {
+      addPost({ id: crypto.randomUUID(), ...data });
+    }
+    closeModal();
+  };
 
   return (
     <form className="p-4 md:p-5" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid gap-4 mb-4 grid-cols-2">
         <div className="col-span-2">
-          <label
-            htmlFor="name"
-            className="mb-2 text-sm font-medium text-gray-900 font-medium"
-          >
+          <label className="mb-2 text-sm font-medium text-gray-900 font-medium">
             Title of the Post
           </label>
           <input
@@ -59,27 +64,24 @@ const Form = ({ id, title = "", body = "" }: TFormProps) => {
           )}
         </div>
         <div className="col-span-2">
-          <label
-            htmlFor="description"
-            className="block mb-2 text-sm font-medium"
-          >
+          <label className="block mb-2 text-sm font-medium">
             Post Description
           </label>
           <textarea
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="min-h-[150px] block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Write the description here"
             {...register("body", { required: true })}
           />
           {errors.body && (
             <span className="mt-2 text-xs text-red-600 dark:text-red-400">
-              The description is required.
+              Description is required.
             </span>
           )}
         </div>
       </div>
       <button
         type="submit"
-        disabled={!titleValue || !bodyValue}
+        disabled={isCTADisabled}
         className={clsx(
           "min-w-[100px] text-center justify-center flex mb-5 px-3 py-2 text-sm font-medium text-white rounded-lg",
           {

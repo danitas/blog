@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CloseCTA from "@/components/Modal/CloseCTA";
 import Form from "@/components/Modal/Form";
 
@@ -42,11 +42,11 @@ const Modal = ({ id, title, body, open, close, isEdit }: TModalProps) => {
             <div className="bg-white rounded-lg shadow-lg w-full max-w-md">
               <div className="flex min-w-[300px] md:min-w-[400px] items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
                 <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                  {isEdit ? "Edit existed Post" : "Create new Post"}
+                  {isEdit ? "Edit Post" : "Create Post"}
                 </h3>
                 <CloseCTA close={close} />
               </div>
-              <Form id={id} title={title} body={body} />
+              <Form id={id} title={title} body={body} closeModal={close} />
             </div>
           </div>
         </>
