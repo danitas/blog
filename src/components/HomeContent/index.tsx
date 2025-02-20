@@ -27,7 +27,7 @@ function HomeContent({ id, title, body }: TPostProps) {
   return (
     <section
       key={id}
-      className="relative w-full md:w-1/2 lg:w-1/5 flex flex-col justify-between max-w-sm px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="relative min-w-full flex flex-col justify-between  px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <section className="flex flex-col">
         <EditCTA id={id} title={title} body={body} />

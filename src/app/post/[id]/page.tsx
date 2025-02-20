@@ -5,7 +5,12 @@ const PostDetail = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
   const post = await getPost({ id });
 
-  if (!post) return <div>No post</div>;
+  if (!post)
+    return (
+      <div className="uppercase my-4 text-5xl font-extrabold leading-none tracking-tight text-blue-950 lg:text-6xl  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        No post
+      </div>
+    );
 
   return (
     <section className="mt-[150px] mx-auto max-w-[300px] md:max-w-[950px] relative flex items-center flex-col">
