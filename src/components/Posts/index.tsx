@@ -12,13 +12,10 @@ const Posts = ({ posts }: TPostsProps) => {
   const { setPosts } = usePostStore();
 
   useEffect(() => {
-    const savedPosts = JSON.parse(
-      localStorage.getItem("posts-storage") || "[]",
-    );
-    if (savedPosts.length > 0) {
-      setPosts(savedPosts);
+    if (posts.length > 0) {
+      setPosts(posts);
     }
-  }, [setPosts]);
+  }, [posts]);
 
   return (
     <>

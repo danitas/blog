@@ -21,7 +21,6 @@ export const axiosRequest = async <T, D = {}>(
 
     const response: AxiosResponse<T> = await axiosInstance.request(config);
 
-    console.log("Success:", response.data);
     return response.data;
   } catch (error: unknown) {
     console.error(`Error making ${method} request to ${url}:`, error);
