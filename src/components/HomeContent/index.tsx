@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import EditCTA from "@/components/HomeContent/EditCTA";
 import { TPost } from "@/utils/api";
+import EditCTA from "@/components/HomeContent/EditCTA";
 
 export type TPostProps = TPost;
 

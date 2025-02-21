@@ -1,19 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Pencil } from "lucide-react";
 import { TPostProps } from "@/components/HomeContent";
-import { createPortal } from "react-dom";
-import Modal from "@/components/Modal";
+import EditModal from "@/components/EditModal";
 
-const EditCTA = ({ id, title, body }: TPostProps) => {
+const EditCTA = (props: TPostProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleStateModal = () => {
     setIsOpen((prevState) => !prevState);
@@ -21,30 +14,20 @@ const EditCTA = ({ id, title, body }: TPostProps) => {
 
   return (
     <>
-      <button
-        type="button"
-        className="absolute right-[15px] top-[15px]"
-        onClick={handleStateModal}
-      >
-        <Pencil
-          width="20"
-          height="20"
-          color="white"
-          className="cursor-pointer"
-        />
-      </button>
-      {mounted &&
-        createPortal(
-          <Modal
-            open={isOpen}
-            close={handleStateModal}
-            isEdit={true}
-            id={id}
-            title={title}
-            body={body}
-          />,
-          document.body,
-        )}
+      <EditModal {...props} isOpen={isOpen} close={handleStateModal}>
+        <button
+          type="button"
+          className="absolute right-[15px] top-[15px]"
+          onClick={handleStateModal}
+        >
+          <Pencil
+            width="20"
+            height="20"
+            color="white"
+            className="cursor-pointer"
+          />
+        </button>
+      </EditModal>
     </>
   );
 };
