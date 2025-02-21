@@ -3,12 +3,17 @@
 import * as React from "react";
 import { usePostStore } from "@/context/PostStoreContext";
 import { NoPostError } from "@/components/NoPostError";
+import { useEffect } from "react";
 
 type Props = {
   id: string;
 };
 export const HomeDetail = ({ id }: Props) => {
-  const { getPost } = usePostStore();
+  const { getPost, setPosts } = usePostStore();
+
+  useEffect(() => {
+    setPosts([]);
+  }, []);
 
   const post = getPost(id);
 

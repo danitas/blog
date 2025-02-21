@@ -53,11 +53,7 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
   };
 
   const getPost = (id: string): TPost | undefined => {
-    const data: TPost[] = locaStorageHelper({
-      type: LocalStorageTypes.GET,
-      key: STORED_FIELD.POSTS,
-    });
-    return data.find((post) => post.id === +id);
+    return posts.find((post) => post.id === +id);
   };
 
   const value = {
