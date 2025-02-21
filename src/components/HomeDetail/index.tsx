@@ -3,6 +3,7 @@
 import * as React from "react";
 import { usePostStore } from "@/context/PostStoreContext";
 import { useEffect, useMemo } from "react";
+import Loader from "@/components/Loader";
 
 type Props = {
   id: string;
@@ -17,6 +18,8 @@ export const HomeDetail = ({ id }: Props) => {
   const post = useMemo(() => {
     return posts.find((p) => +id === p.id);
   }, [posts]);
+
+  if (!post) return <Loader />;
 
   return (
     <div className="py-[50px] md:py-[100px] w-5/6 mx-auto">
