@@ -44,7 +44,7 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
   };
 
   const addPost = (post: TPost) => {
-    setPosts((prev) => [...prev, post]);
+    setPosts((prev) => [post, ...prev]);
   };
 
   const updatePost = (updatedPost: TPost) => {
