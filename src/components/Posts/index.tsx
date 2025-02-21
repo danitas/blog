@@ -9,7 +9,7 @@ type TPostsProps = {
 };
 
 const Posts = ({ posts }: TPostsProps) => {
-  const [visiblePosts, setVisiblePosts] = useState<Omit<TPost, "userId">[]>([]);
+  const [visiblePosts, setVisiblePosts] = useState<TPost[]>([]);
   const [loadCount, setLoadCount] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
   const { posts: storedPosts, setPosts } = usePostStore();
