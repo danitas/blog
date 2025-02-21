@@ -2,25 +2,15 @@
 
 import * as React from "react";
 import { usePostStore } from "@/context/PostStoreContext";
-import { useEffect, useMemo } from "react";
 import { NoPostError } from "@/components/NoPostError";
-import { redirect } from "next/navigation";
 
 type Props = {
   id: string;
 };
 export const HomeDetail = ({ id }: Props) => {
-  const { posts } = usePostStore();
+  const { getPost } = usePostStore();
 
-  useEffect(() => {
-    if (posts.length) return;
-
-    redirect("/");
-  }, [posts]);
-
-  const post = useMemo(() => {
-    return posts.find((post) => post.id === +id);
-  }, [id]);
+  const post = getPost(id);
 
   if (!post) return <NoPostError />;
 

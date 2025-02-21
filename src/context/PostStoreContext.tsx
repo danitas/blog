@@ -1,13 +1,19 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { TPost } from "@/utils/api";
+import {
+  LocalStorageTypes,
+  locaStorageHelper,
+  STORED_FIELD,
+} from "@/utils/helper";
 
 type TPostStoreContext = {
   posts: TPost[];
   setPosts: (value: TPost[]) => void;
   addPost: (value: TPost) => void;
   updatePost: (value: TPost) => void;
+  getPost: (id: string) => TPost | undefined;
 };
 
 const PostStoreContext = createContext<TPostStoreContext | undefined>(
@@ -16,6 +22,25 @@ const PostStoreContext = createContext<TPostStoreContext | undefined>(
 
 const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
   const [posts, setPosts] = useState<TPost[]>([]);
+
+  useEffect(() => {
+    if (posts.length) {
+      locaStorageHelper({
+        type: LocalStorageTypes.SET,
+        key: STORED_FIELD.POSTS,
+        data: posts,
+      });
+    }
+  }, [posts]);
+
+  const cachePosts = (posts: TPost[]) => {
+    const data = locaStorageHelper({
+      type: LocalStorageTypes.GET,
+      key: STORED_FIELD.POSTS,
+    });
+
+    setPosts(data ?? posts);
+  };
 
   const addPost = (post: TPost) => {
     setPosts((prev) => [...prev, post]);
@@ -27,11 +52,20 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
     );
   };
 
+  const getPost = (id: string): TPost | undefined => {
+    const data: TPost[] = locaStorageHelper({
+      type: LocalStorageTypes.GET,
+      key: STORED_FIELD.POSTS,
+    });
+    return data.find((post) => post.id === +id);
+  };
+
   const value = {
     posts,
-    setPosts,
+    setPosts: cachePosts,
     addPost,
     updatePost,
+    getPost,
   };
 
   return (
