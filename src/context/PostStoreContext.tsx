@@ -1,37 +1,54 @@
 "use client";
 
-import React, { createContext, useContext, useRef } from "react";
-import createPostStore, { PostStore } from "@/store/postsStore";
-import { useStore } from "zustand/react";
+import React, { createContext, useContext, useState } from "react";
+import { TPost } from "@/utils/api";
 
-type TPostStoreContext = ReturnType<typeof createPostStore>;
+type TPostStoreContext = {
+  posts: TPost[];
+  setPosts: (value: TPost[]) => void;
+  addPost: (value: TPost) => void;
+  updatePost: (value: TPost) => void;
+};
 
 const PostStoreContext = createContext<TPostStoreContext | undefined>(
   undefined,
 );
 
 const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
-  const storeRef = useRef<TPostStoreContext>(null);
+  const [posts, setPosts] = useState<TPost[]>([]);
 
-  if (!storeRef.current) {
-    storeRef.current = createPostStore();
-  }
+  const addPost = (post: TPost) => {
+    setPosts((prev) => [...prev, post]);
+  };
+
+  const updatePost = (updatedPost: TPost) => {
+    setPosts((prev) =>
+      prev.map((post) => (post.id === updatedPost.id ? updatedPost : post)),
+    );
+  };
+
+  const value = {
+    posts,
+    setPosts,
+    addPost,
+    updatePost,
+  };
 
   return (
-    <PostStoreContext.Provider value={storeRef.current}>
+    <PostStoreContext.Provider value={value}>
       {children}
     </PostStoreContext.Provider>
   );
 };
 
-export const usePostStore = <T,>(selector: (store: PostStore) => T): T => {
+export const usePostStore = () => {
   const postStoreContext = useContext(PostStoreContext);
 
   if (!postStoreContext) {
     throw new Error(`useCounterStore must be used within CounterStoreProvider`);
   }
 
-  return useStore(postStoreContext, selector);
+  return postStoreContext;
 };
 
 export default PostStoreProvider;

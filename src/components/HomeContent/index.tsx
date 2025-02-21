@@ -5,9 +5,10 @@ import Link from "next/link";
 import EditCTA from "@/components/HomeContent/EditCTA";
 import { TPost } from "@/utils/api";
 
-export type TPostProps = Omit<TPost, "userId">;
+export type TPostProps = TPost;
 
-function HomeContent({ id, title, body }: TPostProps) {
+function HomeContent(post: TPostProps) {
+  const { id, body, title } = post;
   const textRef = useRef<HTMLParagraphElement>(null);
   const [shouldClamp, setShouldClamp] = useState(false);
 
@@ -30,7 +31,7 @@ function HomeContent({ id, title, body }: TPostProps) {
       className="relative min-w-full flex flex-col justify-between  px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
     >
       <section className="flex flex-col">
-        <EditCTA id={id} title={title} body={body} />
+        <EditCTA {...post} />
         <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}
         </h3>

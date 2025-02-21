@@ -4,11 +4,9 @@ import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import clsx from "clsx";
 import { usePostStore } from "@/context/PostStoreContext";
+import { TPost } from "@/utils/api";
 
-type TFormProps = {
-  id?: number;
-  title?: string;
-  body?: string;
+type TFormProps = Partial<TPost> & {
   closeModal: () => void;
 };
 
@@ -18,7 +16,7 @@ type TFormValues = {
 };
 
 const Form = ({ id, title = "", body = "", closeModal }: TFormProps) => {
-  const { addPost, updatePost } = usePostStore((store) => store);
+  const { addPost, updatePost, posts } = usePostStore();
   const {
     register,
     handleSubmit,
@@ -37,10 +35,9 @@ const Form = ({ id, title = "", body = "", closeModal }: TFormProps) => {
 
   const onSubmit: SubmitHandler<TFormValues> = (data) => {
     if (isEditing) {
-      updatePost({ id: id!, ...data });
+      updatePost({ id: id!, ...data } as TPost);
     } else {
-      // TODO fix id
-      addPost({ id: 3, ...data });
+      addPost({ id: posts.length + 1, ...data } as TPost);
     }
     closeModal();
   };

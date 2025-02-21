@@ -5,14 +5,14 @@ import { TPost } from "@/utils/api";
 import { usePostStore } from "@/context/PostStoreContext";
 
 type TPostsProps = {
-  posts: Omit<TPost, "userId">[];
+  posts: TPost[];
 };
 
 const Posts = ({ posts }: TPostsProps) => {
   const [visiblePosts, setVisiblePosts] = useState<Omit<TPost, "userId">[]>([]);
   const [loadCount, setLoadCount] = useState(12);
   const [isLoading, setIsLoading] = useState(false);
-  const { posts: storedPosts, setPosts } = usePostStore((store) => store);
+  const { posts: storedPosts, setPosts } = usePostStore();
 
   useEffect(() => {
     if (posts.length > 0) {
