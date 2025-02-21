@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/api";
-import AddPost from "@/components/AddPost";
+import AddPost from "../components/Post/AddPost";
 import Posts from "@/components/Posts";
 
 export default async function Home() {

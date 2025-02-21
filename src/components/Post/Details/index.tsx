@@ -9,7 +9,7 @@ import EditModal from "@/components/EditModal";
 type Props = {
   id: string;
 };
-export const HomeDetail = ({ id }: Props) => {
+export const Details = ({ id }: Props) => {
   const { setPosts, posts } = usePostStore();
 
   const [isOpen, setIsOpen] = useState(false);
