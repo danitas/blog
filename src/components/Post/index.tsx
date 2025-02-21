@@ -1,13 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { TPost } from "@/utils/api";
-import EditCTA from "@/components/HomeContent/EditCTA";
+import EditCTA from "@/components/Post/EditCTA";
+import RemoveCTA from "@/components/Post/RemoveCTA";
 
 export type TPostProps = TPost;
 
-function HomeContent(post: TPostProps) {
+function Post(post: TPostProps) {
   const { id, body, title } = post;
   const textRef = useRef<HTMLParagraphElement>(null);
   const [shouldClamp, setShouldClamp] = useState(false);
@@ -32,7 +33,7 @@ function HomeContent(post: TPostProps) {
     >
       <section className="flex flex-col">
         <EditCTA {...post} />
-        <h3 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h3 className="capitalize mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {title}
         </h3>
         <p
@@ -43,15 +44,19 @@ function HomeContent(post: TPostProps) {
         </p>
       </section>
 
-      <Link
-        href={`/post/${id}`}
-        passHref
-        className="mt-5 px-3 max-w-[100px] py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
-      >
-        Read more
-      </Link>
+      <section className="mt-5 md:mt-9 flex justify-between items-center border-t border-white pt-5 md:pt-9">
+        <Link
+          href={`/post/${id}`}
+          passHref
+          className="capitalize px-3 max-w-[100px] py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-600"
+        >
+          Read more
+        </Link>
+
+        <RemoveCTA id={id} />
+      </section>
     </section>
   );
 }
 
-export default HomeContent;
+export default Post;

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Pencil } from "lucide-react";
-import { TPostProps } from "@/components/HomeContent";
+import { TPostProps } from "@/components/Post";
 import EditModal from "@/components/EditModal";
 
 const EditCTA = (props: TPostProps) => {

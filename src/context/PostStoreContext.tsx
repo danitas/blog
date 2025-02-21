@@ -14,6 +14,7 @@ type TPostStoreContext = {
   addPost: (value: TPost) => void;
   updatePost: (value: TPost) => void;
   getPost: (id: string) => TPost | undefined;
+  removePost: (id: number) => void;
 };
 
 const PostStoreContext = createContext<TPostStoreContext | undefined>(
@@ -56,12 +57,17 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
     return posts.find((post) => post.id === +id);
   };
 
+  const removePost = (id: number) => {
+    setPosts((prev) => prev.filter((post) => post.id !== id));
+  };
+
   const value = {
     posts,
     setPosts: cachePosts,
     addPost,
     updatePost,
     getPost,
+    removePost,
   };
 
   return (

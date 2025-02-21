@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import HomeContent from "@/components/HomeContent";
+import Post from "@/components/Post";
 import { TPost } from "@/utils/api";
 import { usePostStore } from "@/context/PostStoreContext";
 
@@ -36,7 +36,7 @@ const Posts = ({ posts }: TPostsProps) => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-15">
         {visiblePosts.length > 0 &&
-          visiblePosts.map((post) => <HomeContent {...post} key={post.id} />)}
+          visiblePosts.map((post) => <Post {...post} key={post.id} />)}
       </div>
 
       {visiblePosts.length < posts.length && (

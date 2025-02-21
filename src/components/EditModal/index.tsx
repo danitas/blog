@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Modal from "@/components/Modal";
-import { TPostProps } from "@/components/HomeContent";
+import { TPostProps } from "../Post";
 
 type TEditModalProps = TPostProps &
   React.PropsWithChildren & {
