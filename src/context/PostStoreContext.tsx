@@ -4,7 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { TPost } from "@/utils/api";
 import {
   LocalStorageTypes,
-  locaStorageHelper,
+  localStorageHelper,
   STORED_FIELD,
 } from "@/utils/helper";
 
@@ -13,7 +13,6 @@ type TPostStoreContext = {
   setPosts: (value: TPost[]) => void;
   addPost: (value: TPost) => void;
   updatePost: (value: TPost) => void;
-  getPost: (id: string) => TPost | undefined;
   removePost: (id: number) => void;
 };
 
@@ -26,7 +25,7 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
 
   useEffect(() => {
     if (posts.length) {
-      locaStorageHelper({
+      localStorageHelper({
         type: LocalStorageTypes.SET,
         key: STORED_FIELD.POSTS,
         data: posts,
@@ -35,7 +34,7 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
   }, [posts]);
 
   const cachePosts = (posts: TPost[]) => {
-    const data = locaStorageHelper({
+    const data = localStorageHelper({
       type: LocalStorageTypes.GET,
       key: STORED_FIELD.POSTS,
     });
@@ -53,10 +52,6 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
     );
   };
 
-  const getPost = (id: string): TPost | undefined => {
-    return posts.find((post) => post.id === +id);
-  };
-
   const removePost = (id: number) => {
     setPosts((prev) => prev.filter((post) => post.id !== id));
   };
@@ -66,7 +61,6 @@ const PostStoreProvider = ({ children }: React.PropsWithChildren) => {
     setPosts: cachePosts,
     addPost,
     updatePost,
-    getPost,
     removePost,
   };
 
@@ -81,7 +75,7 @@ export const usePostStore = () => {
   const postStoreContext = useContext(PostStoreContext);
 
   if (!postStoreContext) {
-    throw new Error(`useCounterStore must be used within CounterStoreProvider`);
+    throw new Error(`usePostStore must be used within PostStoreProvider`);
   }
 
   return postStoreContext;

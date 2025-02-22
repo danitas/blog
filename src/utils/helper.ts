@@ -13,7 +13,7 @@ type TLocalStorageHelper<T> = {
   key: (typeof STORED_FIELD)[keyof typeof STORED_FIELD];
 };
 
-export const locaStorageHelper = <T>({
+export const localStorageHelper = <T>({
   type,
   key,
   data,
@@ -30,8 +30,8 @@ export const locaStorageHelper = <T>({
     if (type === LocalStorageTypes.SET) {
       try {
         localStorage.setItem(key, JSON.stringify(data));
-      } catch (e) {
-        console.error(e);
+      } catch (e: unknown) {
+        throw Error(e as string);
       }
     }
   }

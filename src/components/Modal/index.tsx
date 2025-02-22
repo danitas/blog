@@ -29,10 +29,11 @@ const Modal = ({ id, title, body, open, close, isEdit }: TModalProps) => {
     <>
       {open && (
         <>
-          <div
+          <button
+            type="button"
             className="cursor-pointer fixed bg-black opacity-75 flex w-full h-full left-0 top-0"
             onClick={() => close()}
-          ></div>
+          />
 
           <div
             className={`${
