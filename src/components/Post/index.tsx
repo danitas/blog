@@ -29,16 +29,16 @@ function Post(post: TPostProps) {
   return (
     <section
       key={id}
-      className="relative min-w-full flex flex-col justify-between  px-6 pt-15 pb-9 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+      className="relative min-w-full flex flex-col justify-between px-6 pt-15 pb-9 border border-gray-200 rounded-lg shadow-sm bg-gray-800 border-gray-700 hover:bg-gray-700"
     >
       <section className="flex flex-col">
         <EditCTA {...post} />
-        <h3 className="capitalize mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h3 className="capitalize mb-2 text-2xl font-bold tracking-tight text-white">
           {title}
         </h3>
         <p
           ref={textRef}
-          className={`font-normal text-gray-700 dark:text-gray-400 ${shouldClamp ? "line-clamp-3" : ""}`}
+          className={`font-normal text-gray-400 ${shouldClamp ? "line-clamp-3" : ""}`}
         >
           {body}
         </p>
