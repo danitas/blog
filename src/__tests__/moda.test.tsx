@@ -55,7 +55,7 @@ describe("Modal", () => {
     const form = screen.getByRole("form");
     expect(form).toBeInTheDocument();
 
-    const closeCTA = screen.getByTestId("closeCTA");
+    const closeCTA = screen.getByText("Close modal");
     expect(closeCTA).toBeInTheDocument();
   });
 });

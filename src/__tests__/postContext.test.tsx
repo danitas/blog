@@ -8,8 +8,8 @@ import {
 import { TPost } from "@/utils/api";
 
 const mockPosts: TPost[] = [
-  { id: 1, title: "First Post", body: "This is the first post" },
-  { id: 2, title: "Second Post", body: "This is the second post" },
+  { userId: 1, id: 1, title: "First Post", body: "This is the first post" },
+  { userId: 2, id: 2, title: "Second Post", body: "This is the second post" },
 ];
 
 describe("PostStoreContext", () => {

@@ -53,7 +53,6 @@ describe("Form Component", () => {
   test("submits a new post and closes modal", async () => {
     render(<Form closeModal={mockCloseModal} />);
 
-    // Fill in the form fields
     fireEvent.change(screen.getByLabelText(/title of the post/i), {
       target: { value: "New Post" },
     });
@@ -61,17 +60,15 @@ describe("Form Component", () => {
       target: { value: "New Post Body" },
     });
 
-    // Click submit button
-    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+    const form = screen.getByRole("form");
+    fireEvent.submit(form);
 
-    // Ensure addPost was called with the correct data
     expect(mockAddPost).toHaveBeenCalledWith({
       id: 2,
       title: "New Post",
       body: "New Post Body",
     });
 
-    // Ensure modal was closed
     expect(mockCloseModal).toHaveBeenCalled();
   });
 
@@ -84,7 +81,9 @@ describe("Form Component", () => {
         closeModal={mockCloseModal}
       />,
     );
-    fireEvent.click(screen.getByRole("button", { name: /submit/i }));
+
+    const form = screen.getByRole("form");
+    fireEvent.submit(form);
 
     expect(mockUpdatePost).toHaveBeenCalledWith({
       id: 1,
