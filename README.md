@@ -2,16 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Make sure that your node version is greater or match the expected
+
+```bash
+  "engines" : {
+    "npm" : ">=10.8.1",
+    "node" : ">=20.16.0"
+  },
+```
+
 First, run the development server:
 
 ```bash
+npm install
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -20,17 +25,44 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Testing
+For testing run command
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This will create a coverage folder automatically that can be used to understand code coverage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Most of the components are covered with unit test, except `Home` component where several integration tests has been created
+
+All tests are stored under the `src/__test__/`folder: [__tests__](src%2F__tests__)
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The Blog app is automatically deploying to Vercel you can check it out by using this link https://blog-danitas.vercel.app/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## App
+
+The Blog app uses https://jsonplaceholder.typicode.com `/posts` API to retrieve data about posts.
+
+On Home [page.tsx](src%2Fapp%2Fpage.tsx) user can create post, delete post, update post and open detailed post view.
+
+Those posts are persisted in local storage inside the [PostStoreContext.tsx](src%2Fcontext%2FPostStoreContext.tsx)
+
+To maintain compatibility with manually created posts, on PostDetail page [page.tsx](src%2Fapp%2Fpost%2F%5Bid%5D%2Fpage.tsx) the data isn't fetched from API, to keep the possibility to show manually created posts even after page refresh.
+
+On Post Detail page the post can be only updated.
+
+## TechStack
+
+- axios
+- jest
+- react-testing-library
+- eslint
+- prettier
+- next.js
+- typescript
+- tailwind
+- lucid-icons
