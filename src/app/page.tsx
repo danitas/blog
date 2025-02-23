@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/api";
-import AddPost from "../components/Post/AddPost";
+import AddPost from "@/components/Post/AddPost";
 import Posts from "@/components/Posts";
 import PostNotFound from "@/components/Post/PostNotFound";
 
