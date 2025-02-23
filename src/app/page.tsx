@@ -4,7 +4,7 @@ import Posts from "@/components/Posts";
 import PostNotFound from "@/components/Post/PostNotFound";
 
 export default async function Home() {
-  const posts = await getPosts({});
+  const posts = await getPosts();
 
   if (!posts) return <PostNotFound />;
 

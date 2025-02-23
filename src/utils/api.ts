@@ -7,18 +7,12 @@ export type TPost = {
   body: string;
 };
 
-export const getPosts = async ({
-  maxPosts,
-}: {
-  maxPosts?: number;
-}): Promise<TPost[] | null> => {
+export const getPosts = async (): Promise<TPost[] | null> => {
   const posts = await axiosRequest<TPost[]>("/posts");
 
   if (!posts) return null;
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  if (maxPosts) return posts.slice(0, maxPosts);
 
   return posts;
 };
